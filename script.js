@@ -339,22 +339,6 @@ function takeCommand(message) {
   else if (message.includes("light mode")) {
     document.body.classList.remove("dark-mode");
     typeMessage("Light mode activated.");
-  } else if (message.includes("calculate") ||
-         message.includes("what is") ||
-         message.includes("solve") ||
-         message.includes("square root") ||
-         message.includes("cube root") ||
-         message.includes("power of") ||
-         message.includes("percent")) {
-  const expression = message
-    .replace(/(calculate|what is|solve|square root|cube root|power of|percent)/gi, "")
-    .trim();
-  if (expression) {
-    const calcResult = advancedCalculator(expression);
-    typeMessage(calcResult);
-   } else {
-    typeMessage("Please provide a calculation for me to solve.");
-   }
   } else {
   // Use OpenAI for unknown inputs
   typeMessage("Let me think...");
@@ -365,7 +349,6 @@ function takeCommand(message) {
       typeMessage("Sorry, I had trouble thinking of a response.");
     });
   }
-}
 // End of the Code
 
   hamburger.addEventListener("click", function () {
