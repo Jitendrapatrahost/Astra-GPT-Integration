@@ -70,7 +70,7 @@ voiceBtn.addEventListener("click", () => {
 
 // Open AI Integration
 async function fetchOpenAIResponse(prompt) {
-  const apiKey = 'YOUR_OPENAI_API_KEY'; // <-- Replace with your actual API key
+  const apiKey = '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'; // <-- Replace with your actual API key
 
   const response = await fetch('https://api.openai.com/v1/chat/completions', {
     method: 'POST',
