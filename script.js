@@ -70,32 +70,37 @@ voiceBtn.addEventListener("click", () => {
 
 // Open AI Integration
 async function fetchOpenAIResponse(prompt) {
-  const apiKey = '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'; // <-- Replace with your actual API key
+  const apiKey = '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';
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant named Astra.' },
+          { role: 'user', content: prompt }
+        ]
+      })
+    });
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
-    },
-    body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content: 'You are a helpful assistant named Astra.' },
-        { role: 'user', content: prompt }
-      ]
-    })
-  });
+    const data = await response.json();
 
-  const data = await response.json();
-  return data.choices[0].message.content.trim();
+    if (response.ok) {
+      return data.choices[0].message.content.trim();
+    } else {
+      console.error("OpenAI API Error:", data);
+      return "Sorry, I couldn't get a response from the AI.";
+    }
+
+  } catch (error) {
+    console.error("Fetch Error:", error);
+    return "Sorry, something went wrong while contacting the AI.";
+  }
 }
-
-// Send button and Enter key input
-sendBtn.addEventListener("click", handleUserInput);
-userInput.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") handleUserInput();
-});
 
 // Handle typed input
 function handleUserInput() {
