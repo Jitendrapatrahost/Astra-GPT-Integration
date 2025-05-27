@@ -349,6 +349,7 @@ function takeCommand(message) {
       typeMessage("Sorry, I had trouble thinking of a response.");
     });
   }
+}  
 // End of the Code
 
   hamburger.addEventListener("click", function () {
